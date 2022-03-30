@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 val mListNum = mutableListOf(1,2,3,4,5,6,7,8,9,10,11,12)
@@ -104,4 +105,19 @@ fun rangeOperator() : Observable<Int>{
 
     // Observable 을 반환한다.
     return Observable.range(1,10)
+}
+
+// 여러번 반복할 경우 repeat 메서드를 사용할경우 반복코드를 최소화할 수 있다.
+fun repeatOperator() : Observable<Int>{
+
+    return Observable.range(1,10).repeat(2)
+}
+
+// n 초 지연코드 1초마다 1씩 증가
+// 각 매게 변수로는 초기지연, 반복 시간, 반복 단위
+
+fun intervalOperator() : Observable<Long> {
+    return Observable.interval(5,1, TimeUnit.SECONDS).takeWhile{values ->
+            values <= 10
+    }
 }
