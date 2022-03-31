@@ -2,6 +2,7 @@ package com.kdn.rxjavastudy
 
 import android.util.Log
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import java.util.*
@@ -13,6 +14,16 @@ val mListNum = mutableListOf(1,2,3,4,5,6,7,8,9,10,11,12)
 val arrayNum = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12)
 
 val arrayNumTen = arrayOf(10,20,30,40,50,60,70,80,90,100,101,102)
+
+val mUserList = mutableListOf<User>(
+    User(1,"최윤성",19),
+    User(2,"민경모",20),
+    User(3,"김현서",10),
+    User(4,"박상선",9),
+    User(5,"김구치리",18),
+    User(6,"코미구",14),
+    User(7,"바무기",18),
+)
 
 // 가장 간단한 생성 방식이다.
 
@@ -120,4 +131,31 @@ fun intervalOperator() : Observable<Long> {
     return Observable.interval(5,1, TimeUnit.SECONDS).takeWhile{values ->
             values <= 10
     }
+}
+
+fun timerOperator() : Observable<Long>{
+    return Observable.timer(5,TimeUnit.SECONDS)
+}
+
+// 각 구현체에 맞는 Emitter 를 활용하여 데이터를 방출한다.
+// 구독자가 stream을 구독 할 때마다 데이터를 방출 (즉, 값이 변화 할때마다의 변화)
+
+fun createOperator() : Observable<Int>{
+    return Observable.create(ObservableOnSubscribe<Int> {
+        try {
+            for(i in mListNum){
+                it.onNext(i * 5)
+            }
+
+            it.onComplete()
+        }
+        catch (e : Exception){
+            // null 이 아닌 error 에 대한 throw 를 보낸다.
+            it.onError(e)
+        }
+    })
+}
+
+fun filterOperator() : Observable<User>{
+    return Observable.fromIterable(mUserList)
 }

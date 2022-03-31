@@ -22,29 +22,29 @@ class MainActivity : AppCompatActivity() {
 
         // 반환값으로 반환된 Observable 의 해당 Observer 가 해당 구독에 대한 알림을 반환해주어 결과를 호출할 수 있다.
 
-//        rangeOperator().subscribe({
-//            Log.d(TAG,"onSubscribe : $it")
-//        },
-//        {
-//            Log.d(TAG,"onError $it")
-//        },
-//        {
-//            Log.d(TAG,"onComplete")
-//        })
+        /*rangeOperator().subscribe({
+            Log.d(TAG,"onSubscribe : $it")
+        },
+        {
+            Log.d(TAG,"onError $it")
+        },
+        {
+            Log.d(TAG,"onComplete")
+        })*/
 
-//        repeatOperator().subscribe(
-//            {
-//                Log.d(TAG,"onSubscribe : $it")
-//            },
-//            {
-//                Log.d(TAG,"onError $it")
-//            },
-//            {
-//                Log.d(TAG,"onComplete")
-//            }
-//        )
+        /*repeatOperator().subscribe(
+            {
+                Log.d(TAG,"onSubscribe : $it")
+            },
+            {
+                Log.d(TAG,"onError $it")
+            },
+            {
+                Log.d(TAG,"onComplete")
+            }
+        )*/
 
-            intervalOperator().subscribe(
+        /*intervalOperator().subscribe(
                 {
                     Log.d(TAG,"onSubscribe : $it")
                     getLocation()
@@ -55,7 +55,48 @@ class MainActivity : AppCompatActivity() {
                 {
                     Log.d(TAG,"onComplete")
                 }
-            )
+            )*/
+
+        /*timerOperator().subscribe(
+                {
+                    Log.d(TAG,"onSubscribe : $it")
+                    getLocation()
+                },
+                {
+                    Log.d(TAG,"onError $it")
+                },
+                {
+                    Log.d(TAG,"onComplete")
+                }
+            )*/
+
+//        createOperator().subscribe(
+//                {
+//                    Log.d(TAG,"onSubscribe : $it")
+//                },
+//                {
+//                    Log.d(TAG,"onError $it")
+//                },
+//                {
+//                    Log.d(TAG,"onComplete")
+//                }
+//            )
+
+        // 다음과깉이 filter 로 조건을 설정해준다.
+
+        filterOperator().filter{
+            it.age > 18
+        }.subscribe(
+                {
+                    Log.d(TAG,"onSubscribe : $it")
+                },
+                {
+                    Log.d(TAG,"onError $it")
+                },
+                {
+                    Log.d(TAG,"onComplete")
+                }
+        )
 
     }
 
