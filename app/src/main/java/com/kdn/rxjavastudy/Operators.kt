@@ -23,6 +23,7 @@ val mUserList = mutableListOf<User>(
     User(5,"김구치리",18),
     User(6,"코미구",14),
     User(7,"바무기",18),
+    User(8,"꼬부기",20),
 )
 
 // 가장 간단한 생성 방식이다.
@@ -157,5 +158,25 @@ fun createOperator() : Observable<Int>{
 }
 
 fun filterOperator() : Observable<User>{
+    return Observable.fromIterable(mUserList)
+}
+
+fun lastOperator() : Observable<User> {
+    return Observable.fromIterable(mUserList)
+}
+
+fun distinctOperator() : Observable<User> {
+    return Observable.fromIterable(mUserList)
+}
+
+fun skipOperator() : Observable<User> {
+    return Observable.fromIterable(mUserList)
+}
+
+fun bufferOperator() : Observable<User>{
+    return Observable.fromIterable(mUserList)
+}
+
+fun mapOperator() : Observable<User>{
     return Observable.fromIterable(mUserList)
 }
