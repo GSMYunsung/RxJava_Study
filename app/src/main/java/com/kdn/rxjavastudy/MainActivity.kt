@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             )*/
 
         // map 데이터로 기존의 데이터를 가공한다.
-        mapOperator()
+        /*mapOperator()
             .map {
            UserProfile(it.id,it.name,it.age,"https://test.com/${it.id}")
         }.subscribe(
@@ -187,9 +187,43 @@ class MainActivity : AppCompatActivity() {
                 {
                     Log.d(TAG,"onComplete")
                 }
+            )*/
+
+        // 기존의 데이터 클래스를 사용하게 되면 오류가 발생한다.
+        // ObservableSource 객체
+
+        /*flatMapOperator()
+            .flatMap {
+                getUserProfile(it.id)
+            }.subscribe(
+                {
+                    Log.d(TAG,"onSubscribe : $it")
+                },
+                {
+                    Log.d(TAG,"onError $it")
+                },
+                {
+                    Log.d(TAG,"onComplete")
+                }
+            )*/
+
+        flatMapOperatorTow()
+            .flatMap {
+                Observable.fromIterable(it)
+            }
+            //.map{ getUserProfile(it.id)}
+            .flatMap { getUserProfile(it.id) }
+            .subscribe(
+                {
+                    Log.d(TAG,"onSubscribe : $it")
+                },
+                {
+                    Log.d(TAG,"onError $it")
+                },
+                {
+                    Log.d(TAG,"onComplete")
+                }
             )
-
-
     }
 
     private fun getLocation(){

@@ -26,6 +26,17 @@ val mUserList = mutableListOf<User>(
     User(8,"꼬부기",20),
 )
 
+val mUserProfileList = mutableListOf<UserProfile>(
+    UserProfile(1,"최윤성",19,"https://test.com/1"),
+    UserProfile(2,"민경모",20,"https://test.com/2"),
+    UserProfile(3,"김현서",10,"https://test.com/3"),
+    UserProfile(4,"박상선",9,"https://test.com/4"),
+    UserProfile(5,"김구치리",18,"https://test.com/5"),
+    UserProfile(6,"코미구",14,"https://test.com/6"),
+    UserProfile(7,"바무기",18,"https://test.com/7"),
+    UserProfile(8,"꼬부기",20,"https://test.com/8"),
+)
+
 // 가장 간단한 생성 방식이다.
 
 fun justOperator(){
@@ -179,4 +190,19 @@ fun bufferOperator() : Observable<User>{
 
 fun mapOperator() : Observable<User>{
     return Observable.fromIterable(mUserList)
+}
+
+fun flatMapOperator() : Observable<User>{
+    return Observable.fromIterable(mUserList)
+}
+
+fun flatMapOperatorTow() : Observable<List<User>>{
+    return Observable.just(mUserList)
+}
+
+fun getUserProfile(id : Long) : Observable<UserProfile> {
+    return Observable.fromIterable(mUserProfileList)
+        .filter{
+            it.id == id
+        }
 }
