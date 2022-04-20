@@ -21,7 +21,7 @@ val mUserList = mutableListOf<User>(
     User(3,"김현서",10),
     User(4,"박상선",9),
     User(5,"김구치리",18),
-    User(6,"코미구",14),
+    User(6,"코미구",19),
     User(7,"바무기",18),
     User(8,"꼬부기",20),
 )
@@ -196,13 +196,31 @@ fun flatMapOperator() : Observable<User>{
     return Observable.fromIterable(mUserList)
 }
 
+// 리스트 형태로 주었을때 형태의 변환
 fun flatMapOperatorTow() : Observable<List<User>>{
     return Observable.just(mUserList)
 }
 
+// 리스트 재정렬 및 반복되는 리스트속 맞는 id 대칭시키기
 fun getUserProfile(id : Long) : Observable<UserProfile> {
     return Observable.fromIterable(mUserProfileList)
         .filter{
             it.id == id
         }
+}
+
+fun groupByOperator() : Observable<User>{
+    return Observable.fromIterable(mUserList)
+}
+
+fun getUser() : Observable<User>{
+    return Observable.fromIterable(mUserList)
+}
+
+fun getProfile() : Observable<UserProfile>{
+    return Observable.fromIterable(mUserProfileList)
+}
+
+fun mergeOperator() : Observable<Any>{
+    return Observable.merge(getUser(), getProfile())
 }

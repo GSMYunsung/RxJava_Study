@@ -207,15 +207,55 @@ class MainActivity : AppCompatActivity() {
                 }
             )*/
 
-        flatMapOperatorTow()
-            .flatMap {
-                Observable.fromIterable(it)
-            }
-            //.map{ getUserProfile(it.id)}
-            .flatMap { getUserProfile(it.id) }
+//        flatMapOperatorTow()
+//            .flatMap {
+//                Observable.fromIterable(it)
+//            }
+//            //.map{ getUserProfile(it.id)}
+//            .flatMap { getUserProfile(it.id) }
+//            .subscribe(
+//                {
+//                    Log.d(TAG,"onSubscribe : $it")
+//                },
+//                {
+//                    Log.d(TAG,"onError $it")
+//                },
+//                {
+//                    Log.d(TAG,"onComplete")
+//                }
+//            )
+
+//        groupByOperator()
+//            .groupBy { it.age }
+//            .flatMapSingle { group ->
+//                group.toList()
+//            }
+////            .filter{ it.key == 19 }
+//            .subscribe(
+//                {
+////                    group ->
+////
+////                    group.subscribe({
+////                        Log.d(TAG, "Key : ${group.key} - value : $it ")
+////                        },
+////                        {
+////                            Log.d(TAG,"onError $it")
+////                        })
+//
+//                    Log.d(TAG,"onNext $it")
+//                },
+//                {
+//                    Log.d(TAG,"onError $it")
+//                },
+//                {
+//                    Log.d(TAG,"onComplete")
+//                }
+//            )
+
+        mergeOperator()
             .subscribe(
                 {
-                    Log.d(TAG,"onSubscribe : $it")
+                    Log.d(TAG,"onNext $it")
                 },
                 {
                     Log.d(TAG,"onError $it")
@@ -224,6 +264,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG,"onComplete")
                 }
             )
+
     }
 
     private fun getLocation(){
