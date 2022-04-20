@@ -86,3 +86,17 @@
     - map 으로 기존의 데이터를 가공 할 수 있다.
 
     - 즉, 데이터클래스의 기존 값을 다른값으로 수정, 삭제를 할 수 있다는 말
+
+    # Group By
+
+    - 하나의 Observable을 여러개의 새로운 GroupedByObservable로 만든다.
+
+    - 원본 Observable의 데이터를 그룹별로 묶는다기보다는 각각의 데이터들이 그룹에 해당하는 Key를 가지게 된다.
+
+    - GroupedByObservable은 getKey()를 통해 구분된 그룹을 알 수 있게 해준다.
+
+    # merge
+
+    - merge는 두 개의 Observable를 merge 시켜 하나로 결합해 전송하는걸 말합니다.
+
+    - merge 를 사용함으로써 마치 두개의 Observable을 결합해 하나의 Observable처럼 동작 시킬수있습니다.
