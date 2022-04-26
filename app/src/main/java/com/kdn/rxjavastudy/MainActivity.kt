@@ -252,10 +252,51 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            )
 
-        mergeOperator()
-            .subscribe(
+//        mergeOperator()
+//            .subscribe(
+//                {
+//                    Log.d(TAG,"onNext $it")
+//                },
+//                {
+//                    Log.d(TAG,"onError $it")
+//                },
+//                {
+//                    Log.d(TAG,"onComplete")
+//                }
+//            )
+
+//        concatOperator()
+//            .subscribe(
+//                {
+//                    Log.d(TAG,"onNext $it")
+//                },
+//                {
+//                    Log.d(TAG,"onError $it")
+//                },
+//                {
+//                    Log.d(TAG,"onComplete")
+//                }
+//            )
+
+//                startWithOperator()
+//            .subscribe(
+//                {
+//                    Log.d(TAG,"onNext $it")
+//                },
+//                {
+//                    Log.d(TAG,"onError $it")
+//                },
+//                {
+//                    Log.d(TAG,"onComplete")
+//                }
+//            )
+
+            zipOperator()
+                .subscribe(
                 {
-                    Log.d(TAG,"onNext $it")
+                    it.forEach{
+                        Log.d(TAG,"onNext $it")
+                    }
                 },
                 {
                     Log.d(TAG,"onError $it")
@@ -264,6 +305,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG,"onComplete")
                 }
             )
+
 
     }
 
