@@ -1,4 +1,4 @@
-package com.kdn.rxjavastudy
+package com.kdn.rxjavastudy.data
 
 data class User(
     val id : Long,
