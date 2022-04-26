@@ -1,10 +1,15 @@
 package com.kdn.rxjavastudy
 
 import android.util.Log
+import com.kdn.rxjavastudy.data.Blog
+import com.kdn.rxjavastudy.data.BlogDetail
+import com.kdn.rxjavastudy.data.User
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.BiFunction
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -24,6 +29,17 @@ val mUserList = mutableListOf<User>(
     User(6,"코미구",19),
     User(7,"바무기",18),
     User(8,"꼬부기",20),
+)
+
+val mBlogList = mutableListOf<Blog>(
+    Blog(1,"title1",1,"content1"),
+    Blog(2,"title2",2,"content2"),
+    Blog(3,"title3",3,"content1"),
+    Blog(4,"title4",4,"content2"),
+    Blog(5,"title5",5,"content3"),
+    Blog(6,"title6",6,"content1"),
+    Blog(1,"title7",7,"content1"),
+
 )
 
 val mUserProfileList = mutableListOf<UserProfile>(
@@ -223,4 +239,59 @@ fun getProfile() : Observable<UserProfile>{
 
 fun mergeOperator() : Observable<Any>{
     return Observable.merge(getUser(), getProfile())
+}
+
+fun getNum1To100() : Observable<Int>{
+    return Observable.range(1,100)
+}
+
+fun getNum101To50() : Observable<Int>{
+    return Observable.range(101,50)
+}
+
+fun concatOperator() : Observable<Int>{
+    return getNum1To100().concatWith(getNum101To50())
+}
+
+fun startWithOperator() : Observable<User> {
+    return getUser().startWith(Single.just(User(0,"0",0)))
+
+    //getNum101To50().startWith(getNum1To100())
+}
+
+fun getBlogs() : Observable<List<Blog>>{
+    return Observable.just(mBlogList)
+}
+
+fun getUsers() : Observable<List<User>>{
+    return Observable.just(mUserList)
+}
+
+fun zipOperator() : Observable<List<BlogDetail>>{
+//    val num = Observable.just(1,2,3,4,5)
+//    val char = Observable.just("A","B","C","D")
+//
+//    return Observable.zip(num,char, BiFunction{ t1, t2 ->
+//        "$t1$t2"
+//    })
+
+   return Observable.zip(getUsers(), getBlogs(), BiFunction{t1, t2 ->
+        blogDetail(t1,t2)
+    })
+}
+
+fun blogDetail(t1 : List<User> , t2 : List<Blog>) : List<BlogDetail> {
+    val listBlogDetail: MutableList<BlogDetail> = emptyList<BlogDetail>().toMutableList()
+    t1.forEach { user ->
+        t2.forEach { blog ->
+            if (blog.userId == user.id) {
+                listBlogDetail.add(
+                    BlogDetail(
+                        blog.id, blog.userId, blog.title, blog.content, user
+                    )
+                )
+            }
+        }
+    }
+    return listBlogDetail
 }
